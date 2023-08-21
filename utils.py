@@ -31,8 +31,8 @@ def semantic_search(query, index, **kwargs):
             print(f"Invalid response: {xr}")
             raise Exception(f"Query failed: {xr.error}")
 
-        titles = [r["metadata"]["title"] for r in xr["matches"]]
-        transcripts = [r["metadata"]["transcript"] for r in xr["matches"]]
+        titles = [r["metadata"].get("title", "Default Title") for r in xr["matches"]]
+        transcripts = [r["metadata"].get("transcript", "Default Transcript") for r in xr["matches"]]
         return list(zip(titles, transcripts))
 
     except Exception as e:
